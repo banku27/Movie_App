@@ -5,6 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:get_it/get_it.dart';
 import 'package:movie_app/models/app_config.dart';
 import 'package:movie_app/services/http__service.dart';
+import 'package:movie_app/services/movie_service.dart';
 
 class SplashScreen extends StatefulWidget {
   final VoidCallback onInitializationComplete;
@@ -38,6 +39,10 @@ class _SplashScreenState extends State<SplashScreen> {
 
     getIt.registerSingleton<HttpService>(
       HttpService(),
+    );
+
+    getIt.registerSingleton<MovieService>(
+      MovieService(),
     );
   }
 
