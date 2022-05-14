@@ -1,4 +1,9 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:get_it/get_it.dart';
+import 'package:movie_app/models/app_config.dart';
 
 class SplashScreen extends StatefulWidget {
   final VoidCallback onInitializationComplete;
@@ -13,8 +18,22 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-    Future.delayed(Duration(seconds: 2))
-        .then((value) => widget.onInitializationComplete());
+    Future.delayed(Duration(seconds: 2)).then((_) =>
+        _setup(context).then((value) => widget.onInitializationComplete()));
+  }
+
+  Future<void> _setup(BuildContext _context) async {
+    final getIt = GetIt.instance;
+    final configFile = await rootBundle.loadString('assets/config/main.json');
+    final configData = jsonDecode(configFile);
+
+    getIt.registerSingleton<AppConfig>(
+      AppConfig(
+        BASE_API_URL: configData['BASE_API_URL'],
+        BASE_IMAGE_API_URL: configData['BASE_IMAGE_API_URL'],
+        API_KEY: configData['API_KEY'],
+      ),
+    );
   }
 
   @override
