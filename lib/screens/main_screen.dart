@@ -2,7 +2,9 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:movie_app/models/movie.dart';
 import 'package:movie_app/models/search_category.dart';
+import 'package:movie_app/widgets/movie_tile.dart';
 
 class MainScreen extends ConsumerWidget {
   double? _deviceHeight;
@@ -65,6 +67,11 @@ class MainScreen extends ConsumerWidget {
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
           _topBarWidget(),
+          Container(
+            height: _deviceHeight! * 0.83,
+            padding: EdgeInsets.symmetric(vertical: _deviceHeight! * 0.01),
+            child: _moviesListViewWidget(),
+          )
         ],
       ),
     );
@@ -146,5 +153,32 @@ class MainScreen extends ConsumerWidget {
         ),
       ],
     );
+  }
+
+  Widget _moviesListViewWidget() {
+    final List<Movie> _movies = [];
+    if (_movies.length != 0) {
+      return ListView.builder(
+        itemCount: _movies.length,
+        itemBuilder: ((BuildContext context, index) {
+          return Padding(
+            padding: EdgeInsets.symmetric(
+                vertical: _deviceHeight! * 0.01, horizontal: 0),
+            child: GestureDetector(
+                onTap: () {},
+                child: MovieTile(
+                    height: _deviceHeight! * 0.20,
+                    width: _deviceWidth! * 0.85,
+                    movie: _movies[index])),
+          );
+        }),
+      );
+    } else {
+      return const Center(
+        child: CircularProgressIndicator(
+          backgroundColor: Colors.white,
+        ),
+      );
+    }
   }
 }

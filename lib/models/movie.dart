@@ -31,7 +31,7 @@ class Movie {
         rating: _json['vote_average'],
         releaseData: _json['release_date']);
   }
-  String posterUrl() {
+  String posterURL() {
     final AppConfig _appConfig = GetIt.instance.get<AppConfig>();
     return '${_appConfig.BASE_IMAGE_API_URL}${this.posterPath}';
   }
