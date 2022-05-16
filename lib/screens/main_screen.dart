@@ -72,7 +72,7 @@ class MainScreen extends ConsumerWidget {
             height: _deviceHeight! * 0.83,
             padding: EdgeInsets.symmetric(vertical: _deviceHeight! * 0.01),
             child: _moviesListViewWidget(),
-          )
+          ),
         ],
       ),
     );
