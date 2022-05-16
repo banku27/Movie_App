@@ -23,6 +23,7 @@ class MainScreen extends ConsumerWidget {
 
   Widget _buildUI() {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       backgroundColor: Colors.black,
       body: Container(
         height: _deviceHeight,
@@ -60,11 +61,11 @@ class MainScreen extends ConsumerWidget {
   Widget _foregroundWidget() {
     return Container(
       padding: EdgeInsets.fromLTRB(0, _deviceHeight! * 0.02, 0, 0.0),
-      width: _deviceHeight! * 0.88,
+      width: _deviceWidth! * 0.88,
       child: Column(
         mainAxisSize: MainAxisSize.max,
         crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisAlignment: MainAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.end,
         children: [
           _topBarWidget(),
           Container(

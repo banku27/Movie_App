@@ -34,7 +34,7 @@ class MovieTile extends StatelessWidget {
   Widget _moviePosterWidget(String _imgURL) {
     return Container(
       height: height,
-      width: width,
+      width: width * 0.35,
       decoration: BoxDecoration(
         image: DecorationImage(
           image: NetworkImage(_imgURL),
