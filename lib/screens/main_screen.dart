@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:movie_app/models/search_category.dart';
 
 class MainScreen extends ConsumerWidget {
   double? _deviceHeight;
@@ -71,7 +72,7 @@ class MainScreen extends ConsumerWidget {
 
   Widget _topBarWidget() {
     return Container(
-        height: _deviceHeight! * 0.88,
+        height: _deviceHeight! * 0.08,
         decoration: BoxDecoration(
             color: Colors.black54, borderRadius: BorderRadius.circular(20.0)),
         child: Row(
@@ -80,6 +81,7 @@ class MainScreen extends ConsumerWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             _searchFieldWidget(),
+            _categorySelectionWidget(),
           ],
         ));
   }
@@ -104,6 +106,45 @@ class MainScreen extends ConsumerWidget {
             fillColor: Colors.white24,
             hintText: 'Search...'),
       ),
+    );
+  }
+
+  _categorySelectionWidget() {
+    return DropdownButton(
+      dropdownColor: Colors.black38,
+      value: SearchCategory.popular,
+      icon: Icon(
+        Icons.menu,
+        color: Colors.white54,
+      ),
+      underline: Container(
+        height: 1,
+        color: Colors.white,
+      ),
+      onChanged: (_value) {},
+      items: [
+        DropdownMenuItem(
+          child: Text(
+            SearchCategory.popular,
+            style: TextStyle(color: Colors.white),
+          ),
+          value: SearchCategory.popular,
+        ),
+        DropdownMenuItem(
+          child: Text(
+            SearchCategory.upcoming,
+            style: TextStyle(color: Colors.white),
+          ),
+          value: SearchCategory.upcoming,
+        ),
+        DropdownMenuItem(
+          child: Text(
+            SearchCategory.none,
+            style: TextStyle(color: Colors.white),
+          ),
+          value: SearchCategory.none,
+        ),
+      ],
     );
   }
 }
