@@ -171,7 +171,22 @@ class MainScreen extends ConsumerWidget {
   }
 
   Widget _moviesListViewWidget() {
-    final List<Movie> _movies = _mainPageData!.movies;
+    final List<Movie> _movies = [];
+    for (var i = 0; i < 20; i++)
+      (_movies.add(
+        Movie(
+          name: "Mortal Kombat",
+          language: "EN",
+          isAdult: false,
+          description:
+              "Mortal Kombat was the first fighting game to introduceasecret fighter",
+          posterPath: "/74xTEgt7R36Fpooo50r9T25onhq.jpg",
+          backdropPath: "/9yBVqNruk6Ykrwc32qrk2TIE5xw.jpg",
+          rating: 7.8,
+          releaseDate: "2021-04-07",
+        ),
+      ));
+
     if (_movies.length != 0) {
       return ListView.builder(
         itemCount: _movies.length,
@@ -180,11 +195,12 @@ class MainScreen extends ConsumerWidget {
             padding: EdgeInsets.symmetric(
                 vertical: _deviceHeight! * 0.01, horizontal: 0),
             child: GestureDetector(
-                onTap: () {},
-                child: MovieTile(
-                    height: _deviceHeight! * 0.20,
-                    width: _deviceWidth! * 0.85,
-                    movie: _movies[index])),
+              onTap: () {},
+              child: MovieTile(
+                  height: _deviceHeight! * 0.20,
+                  width: _deviceWidth! * 0.85,
+                  movie: _movies[index]),
+            ),
           );
         }),
       );
