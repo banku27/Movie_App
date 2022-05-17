@@ -2,19 +2,33 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:movie_app/controller/main_page_data_controller.dart';
+import 'package:movie_app/models/main_page_data.dart';
+
 import 'package:movie_app/models/movie.dart';
 import 'package:movie_app/models/search_category.dart';
 import 'package:movie_app/widgets/movie_tile.dart';
+
+final mainPageDataControllerProvider =
+    StateNotifierProvider<MainPageDataController>((ref) {
+  return MainPageDataController();
+});
 
 class MainScreen extends ConsumerWidget {
   double? _deviceHeight;
   double? _deviceWidth;
 
+  MainPageDataController? _mainPageDataController;
+  MainPageData? _mainPageData;
+
   late TextEditingController _searchTextFieldController;
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  Widget build(BuildContext context, ScopedReader watch) {
     _deviceHeight = MediaQuery.of(context).size.height;
     _deviceWidth = MediaQuery.of(context).size.width;
+    _mainPageDataController = watch(mainPageDataControllerProvider);
+
+    _mainPageData = watch(mainPageDataControllerProvider.state);
     // print(_deviceHeight);
     // print(_deviceWidth);
     _searchTextFieldController = TextEditingController();
@@ -157,7 +171,7 @@ class MainScreen extends ConsumerWidget {
   }
 
   Widget _moviesListViewWidget() {
-    final List<Movie> _movies = [];
+    final List<Movie> _movies = _mainPageData!.movies;
     if (_movies.length != 0) {
       return ListView.builder(
         itemCount: _movies.length,
