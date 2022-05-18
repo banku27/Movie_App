@@ -16,6 +16,7 @@ class MovieService {
     Response _response =
         await _http!.get('/movie/popular', query: {'page': page});
     if (_response.statusCode == 200) {
+      print('success');
       Map _data = _response.data;
       List<Movie> _movies = _data['results'].map<Movie>((_movieData) {
         return Movie.fromJson(_movieData);

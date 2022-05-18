@@ -6,8 +6,8 @@ class HttpService {
   final Dio dio = Dio();
   final GetIt getIt = GetIt.instance;
 
-  late String _base_url;
-  late String _api_key;
+  String? _base_url;
+  String? _api_key;
 
   HttpService() {
     AppConfig _config = getIt.get<AppConfig>();
@@ -21,7 +21,7 @@ class HttpService {
 
       Map<String, dynamic> _query = {
         'api_key': _api_key,
-        'language': 'en-us',
+        'language': 'en-US',
       };
       if (query != null) {
         _query.addAll(query);

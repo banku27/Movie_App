@@ -8,7 +8,7 @@ void main() {
     SplashScreen(
       key: UniqueKey(),
       onInitializationComplete: () => runApp(
-        ProviderScope(child: MyApp()),
+        const ProviderScope(child: MyApp()),
       ),
     ),
   );
